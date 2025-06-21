@@ -172,7 +172,6 @@ export default function BSSmartApp() {
       total + Object.values(store).reduce((storeTotal, qty) => storeTotal + qty, 0), 0
     );
   };
-
   const StatusBar: React.FC = () => (
     <div className="flex justify-between items-center px-4 py-2 bg-gray-900 text-white text-sm">
       <span>{currentTime.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}</span>
@@ -404,6 +403,15 @@ export default function BSSmartApp() {
     </div>
   );
 
+  // Function to mark a voucher as used
+  const useVoucher = (voucherId: string) => {
+    setAvailableVouchers(prev =>
+      prev.map(v =>
+        v.id === voucherId ? { ...v, used: true } : v
+      )
+    );
+  };
+
   const VouchersScreen: React.FC = () => (
     <div className="min-h-screen bg-gray-50">
       <Header title="Gutscheine &amp; Angebote" onBack={() => setCurrentScreen('home')} />
@@ -634,7 +642,6 @@ export default function BSSmartApp() {
                       <span className="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full">
                         -{item.discount}%
                       </div>
-                    </div>
                   ) : (
                     <span className="font-bold text-orange-600">{item.price.toFixed(2)}€</span>
                   )}
