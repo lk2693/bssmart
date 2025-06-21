@@ -639,8 +639,9 @@ export default function BSSmartApp() {
                     <div className="flex items-center gap-2">
                       <span className="font-bold text-orange-600">{item.price.toFixed(2)}€</span>
                       <span className="text-xs text-gray-500 line-through">{item.originalPrice.toFixed(2)}€</span>
-                      <span className="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full">
-                        -{item.discount}%
+                        <span className="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full">
+                          -{item.discount}%
+                        </span>
                       </div>
                   ) : (
                     <span className="font-bold text-orange-600">{item.price.toFixed(2)}€</span>
