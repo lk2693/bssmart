@@ -173,16 +173,6 @@ export default function BSSmartApp() {
     );
   };
 
-  const useVoucher = (voucherId: string): void => {
-    setAvailableVouchers(prev => 
-      prev.map(voucher => 
-        voucher.id === voucherId 
-          ? { ...voucher, used: true }
-          : voucher
-      )
-    );
-  };
-
   const StatusBar: React.FC = () => (
     <div className="flex justify-between items-center px-4 py-2 bg-gray-900 text-white text-sm">
       <span>{currentTime.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}</span>
@@ -643,7 +633,7 @@ export default function BSSmartApp() {
                       <span className="text-xs text-gray-500 line-through">{item.originalPrice.toFixed(2)}€</span>
                       <span className="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full">
                         -{item.discount}%
-                      </span>
+                      </div>
                     </div>
                   ) : (
                     <span className="font-bold text-orange-600">{item.price.toFixed(2)}€</span>
