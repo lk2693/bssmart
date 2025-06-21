@@ -403,15 +403,6 @@ export default function BSSmartApp() {
     </div>
   );
 
-  // Function to mark a voucher as used
-  const useVoucher = (voucherId: string) => {
-    setAvailableVouchers(prev =>
-      prev.map(v =>
-        v.id === voucherId ? { ...v, used: true } : v
-      )
-    );
-  };
-
   const VouchersScreen: React.FC = () => (
     <div className="min-h-screen bg-gray-50">
       <Header title="Gutscheine &amp; Angebote" onBack={() => setCurrentScreen('home')} />
@@ -458,7 +449,13 @@ export default function BSSmartApp() {
             <VoucherCard 
               key={voucher.id} 
               voucher={voucher}
-              onUse={() => useVoucher(voucher.id)}
+              onUse={() => {
+                setAvailableVouchers(prev =>
+                  prev.map(v =>
+                    v.id === voucher.id ? { ...v, used: true } : v
+                  )
+                );
+              }}
             />
           ))}
         </div>
