@@ -1,13 +1,12 @@
 "use client";
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 import { 
-  MapPin, Navigation, Calendar, Car, Camera, Star, 
+  MapPin, Navigation, Car, Camera, Star, 
   Clock, Wifi, Battery, Signal, ArrowLeft, QrCode,
   Heart, Share2, Info, Coffee, ShoppingBag, Plus,
   Minus, Check, User, Phone, MessageCircle, Gift,
-  Percent, Tag, Clock3, MapPinIcon
+  Clock3, MapPinIcon
 } from 'lucide-react';
 
 interface CartItems {
@@ -350,60 +349,6 @@ export default function BSSmartApp() {
     </div>
   );
 
-  const VouchersScreen: React.FC = () => (
-    <div className="min-h-screen bg-gray-50">
-      <Header title="Gutscheine & Angebote" onBack={() => setCurrentScreen('home')} />
-      
-      {/* Stats */}
-      <div className="px-4 py-4">
-        <div className="bg-gradient-to-r from-pink-500 to-purple-600 text-white p-4 rounded-xl mb-4 shadow-lg">
-          <h3 className="font-semibold text-lg mb-2">Ihre Gutscheine</h3>
-          <div className="grid grid-cols-3 gap-4 text-center">
-            <div>
-              <div className="text-2xl font-bold">{availableVouchers.filter(v => !v.used).length}</div>
-              <div className="text-sm opacity-90">Verfügbar</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold">{availableVouchers.filter(v => v.used).length}</div>
-              <div className="text-sm opacity-90">Eingelöst</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold">127€</div>
-              <div className="text-sm opacity-90">Gespart</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Filter Categories */}
-      <div className="px-4 py-4">
-        <div className="flex gap-3 overflow-x-auto pb-2">
-          {['Alle', 'Mode', 'Gastronomie', 'Elektronik', 'Kunst', 'Bücher'].map((category) => (
-            <button key={category} className={`px-4 py-2 rounded-full whitespace-nowrap text-sm font-medium transition-colors ${
-              category === 'Alle' ? 'bg-pink-500 text-white' : 'bg-white border border-gray-300 hover:bg-gray-50'
-            }`}>
-              {category}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Vouchers */}
-      <div className="px-4 pb-6">
-        <h3 className="text-lg font-semibold mb-3 text-gray-800">Aktuelle Angebote</h3>
-        <div className="space-y-4">
-          {availableVouchers.map((voucher) => (
-            <VoucherCard 
-              key={voucher.id} 
-              voucher={voucher}
-              onUse={() => useVoucher(voucher.id)}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-
   interface VoucherCardProps {
     voucher: Voucher;
     onUse: () => void;
@@ -464,6 +409,60 @@ export default function BSSmartApp() {
               ✓ Eingelöst
             </div>
           )}
+        </div>
+      </div>
+    </div>
+  );
+
+  const VouchersScreen: React.FC = () => (
+    <div className="min-h-screen bg-gray-50">
+      <Header title="Gutscheine &amp; Angebote" onBack={() => setCurrentScreen('home')} />
+      
+      {/* Stats */}
+      <div className="px-4 py-4">
+        <div className="bg-gradient-to-r from-pink-500 to-purple-600 text-white p-4 rounded-xl mb-4 shadow-lg">
+          <h3 className="font-semibold text-lg mb-2">Ihre Gutscheine</h3>
+          <div className="grid grid-cols-3 gap-4 text-center">
+            <div>
+              <div className="text-2xl font-bold">{availableVouchers.filter(v => !v.used).length}</div>
+              <div className="text-sm opacity-90">Verfügbar</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold">{availableVouchers.filter(v => v.used).length}</div>
+              <div className="text-sm opacity-90">Eingelöst</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold">127€</div>
+              <div className="text-sm opacity-90">Gespart</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Filter Categories */}
+      <div className="px-4 py-4">
+        <div className="flex gap-3 overflow-x-auto pb-2">
+          {['Alle', 'Mode', 'Gastronomie', 'Elektronik', 'Kunst', 'Bücher'].map((category) => (
+            <button key={category} className={`px-4 py-2 rounded-full whitespace-nowrap text-sm font-medium transition-colors ${
+              category === 'Alle' ? 'bg-pink-500 text-white' : 'bg-white border border-gray-300 hover:bg-gray-50'
+            }`}>
+              {category}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Vouchers */}
+      <div className="px-4 pb-6">
+        <h3 className="text-lg font-semibold mb-3 text-gray-800">Aktuelle Angebote</h3>
+        <div className="space-y-4">
+          {availableVouchers.map((voucher) => (
+            <VoucherCard 
+              key={voucher.id} 
+              voucher={voucher}
+              onUse={() => useVoucher(voucher.id)}
+            />
+          ))}
         </div>
       </div>
     </div>
